@@ -28,18 +28,17 @@
             gap: 20px;
         }
 
-        /* Card Block with Thin Black Border matching your Resume Analyzer layout */
         .card-block {
             background: #ffffff;
             border: 1px solid #000000;
             padding: 24px;
             text-align: center;
-            border-radius: 0px; /* Sharp corners */
+            border-radius: 0px;
         }
 
         .upload-zone {
             cursor: pointer;
-            font-size: 24px; /* Set to requested 24px */
+            font-size: 24px; 
             font-weight: 500;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -64,7 +63,7 @@
         }
 
         .control-item label {
-            font-size: 18px; /* Set to requested 18px */
+            font-size: 18px; 
             font-weight: 500;
             text-transform: uppercase;
             color: #000000;
@@ -73,7 +72,7 @@
 
         input[type="range"] {
             width: 100%;
-            accent-color: #cc3333; /* Crimson red accent */
+            accent-color: #cc3333; 
             cursor: pointer;
         }
 
@@ -81,7 +80,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 18px; /* Set to requested 18px */
+            font-size: 18px; 
             cursor: pointer;
             font-weight: 500;
             text-transform: uppercase;
@@ -94,14 +93,13 @@
             height: 18px;
         }
 
-        /* Solid Crimson Red Execution Button matching 'GO' */
         .btn-go {
             font-family: 'Oswald', sans-serif;
-            background-color: #cc3333; /* Crimson Red */
+            background-color: #cc3333; 
             color: #ffffff;
             border: none;
             padding: 16px;
-            font-size: 24px; /* Set to prominent 24px */
+            font-size: 24px; 
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -120,7 +118,7 @@
             color: #000000;
             border: 1px solid #000000;
             padding: 12px;
-            font-size: 18px; /* Set to 18px layout context */
+            font-size: 18px; 
             font-weight: 500;
             text-transform: uppercase;
             cursor: pointer;
@@ -132,10 +130,9 @@
             background-color: #f5f5f5;
         }
 
-        /* Matrix Output display window */
         .output-block {
             border: 1px solid #000000;
-            background-color: #000000; /* Dark terminal container view */
+            background-color: #000000; 
             color: #ffffff;
             text-align: left;
             padding: 24px;
@@ -143,18 +140,18 @@
         }
 
         #output {
-            font-family: 'JetBrains Mono', monospace; /* Monospace required for text alignment */
-            font-size: 9px;
-            line-height: 9px;
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 11px;
+            line-height: 11px;
             letter-spacing: 0px;
             white-space: pre;
-            min-height: 350px;
-            max-height: 600px;
+            min-height: 250px;
+            max-height: 500px;
         }
         
         .matrix-info {
             font-family: 'Oswald', sans-serif;
-            font-size: 18px; /* Matched to 18px template specification */
+            font-size: 18px; 
             color: #888888;
             margin-bottom: 12px;
             display: block;
@@ -174,8 +171,8 @@
     <div class="card-block">
         <div class="controls-grid">
             <div class="control-item">
-                <label id="widthLabel">Width: 105 Chars</label>
-                <input type="range" id="widthInput" value="105" min="40" max="200" step="1">
+                <label id="widthLabel">Width: 60 Chars</label>
+                <input type="range" id="widthInput" value="60" min="30" max="120" step="1">
             </div>
             <div class="control-item">
                 <label id="thresholdLabel">Contrast Threshold: 104</label>
@@ -271,8 +268,13 @@
 
         const targetWidthChars = parseInt(widthInput.value);
         const targetPixelWidth = targetWidthChars * 2; 
+        
+        // Calculate the height scale factor
         const scale = targetPixelWidth / currentImage.width;
-        const targetPixelHeight = Math.round(currentImage.height * scale);
+        
+        // Added aspect-ratio multiplier (0.75) to pre-flatten the image height
+        // This ensures it looks normal when pasted into comment sections with tight lines
+        const targetPixelHeight = Math.round((currentImage.height * scale) * 0.75);
         
         canvas.width = targetPixelWidth;
         canvas.height = targetPixelHeight + (4 - (targetPixelHeight % 4));
@@ -316,7 +318,7 @@
         }
 
         output.textContent = resultText;
-        dimensionsLabel.textContent = `${targetWidthChars} x ${canvas.height / 4} matrix`;
+        dimensionsLabel.textContent = `${targetWidthChars} x ${canvas.height / 4} comment block`;
     }
 </script>
 </body>
