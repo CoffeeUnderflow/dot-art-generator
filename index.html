@@ -8,16 +8,42 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- CHAMELEON THEME VARIABLES --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #000000;
+            --accent-color: #cc3333;
+            --accent-hover: #b32d2d;
+            --card-bg: #ffffff;
+            --output-bg: #000000;
+            --output-text: #ffffff;
+            --label-color: #888888;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --border-color: #aaaaaa;
+            --accent-color: #D32F2F;
+            --accent-hover: #B71C1C;
+            --card-bg: #1e1e1e;
+            --output-bg: #000000;
+            --output-text: #00ff00; /* Fun hacker green for dark mode! */
+            --label-color: #aaaaaa;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Oswald', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -29,11 +55,12 @@
         }
 
         .card-block {
-            background: #ffffff;
-            border: 1px solid #000000;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             padding: 24px;
             text-align: center;
             border-radius: 0px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .upload-zone {
@@ -66,13 +93,13 @@
             font-size: 18px; 
             font-weight: 500;
             text-transform: uppercase;
-            color: #000000;
+            color: var(--text-color);
             letter-spacing: 0.5px;
         }
 
         input[type="range"] {
             width: 100%;
-            accent-color: #cc3333; 
+            accent-color: var(--accent-color); 
             cursor: pointer;
         }
 
@@ -88,15 +115,15 @@
         }
 
         .checkbox-label input {
-            accent-color: #cc3333;
+            accent-color: var(--accent-color);
             width: 18px;
             height: 18px;
         }
 
         .btn-go {
             font-family: 'Oswald', sans-serif;
-            background-color: #cc3333; 
-            color: #ffffff;
+            background-color: var(--accent-color); 
+            color: #ffffff; /* Always white text on red */
             border: none;
             padding: 16px;
             font-size: 24px; 
@@ -105,18 +132,18 @@
             letter-spacing: 1px;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.1s;
+            transition: background-color 0.2s;
         }
 
         .btn-go:hover {
-            background-color: #b32d2d;
+            background-color: var(--accent-hover);
         }
 
         .btn-secondary {
             font-family: 'Oswald', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            border: 1px solid #000000;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
             padding: 12px;
             font-size: 18px; 
             font-weight: 500;
@@ -125,18 +152,21 @@
             width: 100%;
             margin-top: 10px;
             letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
         .btn-secondary:hover {
-            background-color: #f5f5f5;
+            background-color: var(--card-bg);
+            opacity: 0.8;
         }
 
         .output-block {
-            border: 1px solid #000000;
-            background-color: #000000; 
-            color: #ffffff;
+            border: 1px solid var(--border-color);
+            background-color: var(--output-bg); 
+            color: var(--output-text);
             text-align: left;
             padding: 24px;
             overflow: auto;
+            transition: all 0.3s ease;
         }
 
         #output {
@@ -152,7 +182,7 @@
         .matrix-info {
             font-family: 'Oswald', sans-serif;
             font-size: 18px; 
-            color: #888888;
+            color: var(--label-color);
             margin-bottom: 12px;
             display: block;
             text-transform: uppercase;
@@ -199,6 +229,12 @@
 <canvas id="canvas" style="display:none;"></canvas>
 
 <script>
+    // --- THE URL THEME READER (Added for Iframe Sync) ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTheme = urlParams.get('theme') || 'dark'; // Defaults to dark mode
+    document.documentElement.setAttribute('data-theme', urlTheme);
+
+    // --- YOUR ORIGINAL ENGINE LOGIC ---
     const imageLoader = document.getElementById('imageLoader');
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -273,7 +309,6 @@
         const scale = targetPixelWidth / currentImage.width;
         
         // Added aspect-ratio multiplier (0.75) to pre-flatten the image height
-        // This ensures it looks normal when pasted into comment sections with tight lines
         const targetPixelHeight = Math.round((currentImage.height * scale) * 0.75);
         
         canvas.width = targetPixelWidth;
