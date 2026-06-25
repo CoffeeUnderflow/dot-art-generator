@@ -90,17 +90,20 @@ body {
     cursor: pointer;
     padding: 30px 20px;
     transition: all 0.3s ease;
+    /* OVERRIDE: Make it look like a distinct drop zone */
+    border: 2px dashed var(--text-muted); 
+    background-color: transparent; /* Removes the card background so it looks recessed */
 }
 
 .upload-zone:hover {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--text-main);
     color: var(--text-main);
     transform: translateY(-2px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    background-color: var(--card-bg); /* Fills in on hover for tactile feedback */
 }
 
 .upload-zone input { display: none; }
-
 /* --- CONTROLS --- */
 .controls-grid {
     display: grid;
@@ -152,42 +155,35 @@ input[type="range"] {
     height: 16px;
 }
 
-/* --- BUTTONS --- */
-.btn-go {
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
-    /* Invisible border to perfectly match the secondary button's dimensions */
-    border: 1px solid transparent; 
+/* --- BUTTONS (Unified Ghost Style) --- */
+.btn-go, 
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 2px solid var(--text-muted); 
     border-radius: 6px;
-    padding: 16px 32px;
+    padding: 15px 32px; 
     font-size: 14px;
     font-family: var(--font-stack);
     font-weight: 700;
     letter-spacing: 1.5px;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+/* Both buttons get the solid fill and pop-out effect on hover */
+.btn-go:hover, 
+.btn-secondary:hover {
+    border-color: var(--text-main);
+    background-color: var(--text-main);
+    color: var(--card-bg);
+    transform: scale(1.01);
     box-shadow: 0 4px 15px var(--btn-shadow);
 }
 
-.btn-go:hover { transform: scale(1.01); }
-.btn-go:active { transform: scale(0.99); }
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-main);
-    border: 1px solid var(--border-light);
-    border-radius: 6px;
-    padding: 16px 32px; /* Matched to btn-go */
-    font-size: 14px; /* Matched to btn-go */
-    font-family: var(--font-stack);
-    font-weight: 600;
-    letter-spacing: 1.5px; /* Matched to btn-go */
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-secondary:hover {
-    background-color: var(--border-light);
+.btn-go:active, 
+.btn-secondary:active {
+    transform: scale(0.99);
 }
 
 /* --- BUTTON GROUP (Side-by-side layout) --- */
@@ -200,6 +196,13 @@ input[type="range"] {
 .button-group button {
     flex: 1; /* Forces perfectly equal widths */
     margin-top: 0;
+}
+
+/* Stack them vertically on mobile so the text doesn't get crushed */
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+    }
 }
 
 /* Stack them vertically on mobile so the text doesn't get crushed */
