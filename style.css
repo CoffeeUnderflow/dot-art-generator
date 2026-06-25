@@ -2,7 +2,7 @@
    1. BASE DEFAULT (Dark)
    ========================================================================== */
 :root {
-    --bg-glow: radial-gradient(circle at 50% 25%, #2a2a2a 0%, #0a0a0a 80%, #050505 100%);
+    --bg-glow: #0a0a0a;
     --card-bg: #151515;
     --input-bg: #111111;
     --text-main: #FFFFFF;
@@ -19,7 +19,7 @@
    2. EXPLICIT JAVASCRIPT OVERRIDES (Chameleon System)
    ========================================================================== */
 :root[data-theme="dark"] {
-    --bg-glow: radial-gradient(circle at 50% 25%, #2a2a2a 0%, #0a0a0a 80%, #050505 100%);
+    --bg-glow: #0a0a0a;
     --card-bg: #151515;
     --input-bg: #111111;
     --text-main: #FFFFFF;
