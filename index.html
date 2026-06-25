@@ -20,6 +20,11 @@
         <input type="file" id="imageLoader" accept="image/*">
     </div>
 
+    <div class="output-block">
+        <span class="matrix-info" id="dimensionsLabel">0 x 0 matrix</span>
+        <pre id="output">Waiting for file ingestion...</pre>
+    </div>
+
     <div class="card-block">
         <div class="controls-grid">
             <div class="control-item">
@@ -38,12 +43,9 @@
         </label>
     </div>
     
-    <button class="btn-go" id="copyBtn">Copy Dot Art</button>
-    <button class="btn-secondary" id="downloadBtn">Download .txt File</button>
-
-    <div class="output-block">
-        <span class="matrix-info" id="dimensionsLabel">0 x 0 matrix</span>
-        <pre id="output">Waiting for file ingestion...</pre>
+    <div class="button-group">
+        <button class="btn-go" id="copyBtn">Copy Dot Art</button>
+        <button class="btn-secondary" id="downloadBtn">Download .txt File</button>
     </div>
 
 </div>

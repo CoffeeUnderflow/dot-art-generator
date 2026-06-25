@@ -156,7 +156,8 @@ input[type="range"] {
 .btn-go {
     background-color: var(--btn-bg);
     color: var(--btn-text);
-    border: none;
+    /* Invisible border to perfectly match the secondary button's dimensions */
+    border: 1px solid transparent; 
     border-radius: 6px;
     padding: 16px 32px;
     font-size: 14px;
@@ -164,7 +165,6 @@ input[type="range"] {
     font-weight: 700;
     letter-spacing: 1.5px;
     cursor: pointer;
-    width: 100%;
     transition: all 0.2s ease;
     box-shadow: 0 4px 15px var(--btn-shadow);
 }
@@ -177,18 +177,36 @@ input[type="range"] {
     color: var(--text-main);
     border: 1px solid var(--border-light);
     border-radius: 6px;
-    padding: 12px 32px;
-    font-size: 13px;
+    padding: 16px 32px; /* Matched to btn-go */
+    font-size: 14px; /* Matched to btn-go */
     font-family: var(--font-stack);
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px; /* Matched to btn-go */
     cursor: pointer;
-    width: 100%;
     transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
     background-color: var(--border-light);
+}
+
+/* --- BUTTON GROUP (Side-by-side layout) --- */
+.button-group {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.button-group button {
+    flex: 1; /* Forces perfectly equal widths */
+    margin-top: 0;
+}
+
+/* Stack them vertically on mobile so the text doesn't get crushed */
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+    }
 }
 
 /* --- OUTPUT MATRIX --- */
