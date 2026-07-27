@@ -269,3 +269,31 @@ button, .upload-zone, label {
     background-color: transparent !important;
     color: #FFFFFF !important; 
 }
+
+/* =========================================
+   CUSTOM SCROLLBAR STYLING
+   ========================================= */
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-light, #444) transparent;
+}
+
+/* For Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+    width: 8px; /* Makes the scrollbar much slimmer */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* Hides the ugly background track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-light, rgba(255, 255, 255, 0.15)); /* Soft, translucent gray */
+    border-radius: 10px; /* Gives it a modern, rounded pill shape */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted, rgba(255, 255, 255, 0.3)); /* Gets slightly brighter when hovered */
+}
