@@ -63,10 +63,31 @@ invertInput.addEventListener('change', () => {
 
 copyBtn.addEventListener('click', () => {
     if(!currentImage) return;
-    navigator.clipboard.writeText(output.textContent);
-    const originalText = copyBtn.textContent;
-    copyBtn.textContent = "Copied to Clipboard!";
-    setTimeout(() => copyBtn.textContent = originalText, 2000);
+    
+    const textToCopy = output.textContent;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = "Copied to Clipboard!";
+        setTimeout(() => copyBtn.textContent = originalText, 2000);
+    }).catch(err => {
+        // Fallback if blocked by permissions policy
+        const textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = "Copied to Clipboard!";
+            setTimeout(() => copyBtn.textContent = originalText, 2000);
+        } catch (e) {
+            alert('Failed to copy. Please download the .txt file instead.');
+        }
+        document.body.removeChild(textArea);
+    });
 });
 
 downloadBtn.addEventListener('click', () => {
