@@ -1,16 +1,16 @@
 /* ==========================================================================
-   1. BASE DEFAULT (Dark)
+   1. BASE DEFAULT (Dark Mode)
    ========================================================================== */
 :root {
-    --bg-glow: #121212;
-    --card-bg: #151515;
-    --input-bg: #111111;
-    --text-main: #FFFFFF;
-    --text-muted: #8A8A8A;
-    --border-light: rgba(255, 255, 255, 0.08); 
-    --btn-bg: #FFFFFF;
-    --btn-text: #000000;
-    --btn-shadow: rgba(255, 255, 255, 0.1);
+    --bg-glow: #1d1d1d;
+    --card-bg: #222222; /* Slightly lifted from the background */
+    --input-bg: #161616; /* Slightly recessed */
+    --text-main: #efe9df;
+    --text-muted: rgba(239, 233, 223, 0.6);
+    --border-light: rgba(239, 233, 223, 0.1); 
+    --btn-bg: #efe9df;
+    --btn-text: #1d1d1d;
+    --btn-shadow: rgba(239, 233, 223, 0.15);
     --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --mono-font: 'JetBrains Mono', monospace;
 }
@@ -19,27 +19,27 @@
    2. EXPLICIT JAVASCRIPT OVERRIDES (Chameleon System)
    ========================================================================== */
 :root[data-theme="dark"] {
-    --bg-glow: #121212;
-    --card-bg: #151515;
-    --input-bg: #111111;
-    --text-main: #FFFFFF;
-    --text-muted: #8A8A8A;
-    --border-light: rgba(255, 255, 255, 0.08); 
-    --btn-bg: #FFFFFF;
-    --btn-text: #000000;
-    --btn-shadow: rgba(255, 255, 255, 0.1);
+    --bg-glow: #1d1d1d;
+    --card-bg: #222222;
+    --input-bg: #161616;
+    --text-main: #efe9df;
+    --text-muted: rgba(239, 233, 223, 0.6);
+    --border-light: rgba(239, 233, 223, 0.1); 
+    --btn-bg: #efe9df;
+    --btn-text: #1d1d1d;
+    --btn-shadow: rgba(239, 233, 223, 0.15);
 }
 
 :root[data-theme="light"] {
-    --bg-glow: #ffffff;
-    --card-bg: #ffffff;
-    --input-bg: #ffffff;
-    --text-main: #212529;
-    --text-muted: #6c757d;
-    --border-light: #dee2e6;
-    --btn-bg: #212529;
-    --btn-text: #ffffff;
-    --btn-shadow: rgba(0, 0, 0, 0.1);
+    --bg-glow: #efe9df;
+    --card-bg: #fdfbf7; /* Brightened cream for cards */
+    --input-bg: #e6e0d4; /* Slightly deeper cream for inputs */
+    --text-main: #1d1d1d;
+    --text-muted: rgba(29, 29, 29, 0.6);
+    --border-light: rgba(29, 29, 29, 0.15);
+    --btn-bg: #1d1d1d;
+    --btn-text: #efe9df;
+    --btn-shadow: rgba(29, 29, 29, 0.15);
 }
 
 /* ==========================================================================
@@ -52,7 +52,7 @@ body {
     background: var(--bg-glow);
     background-attachment: fixed;
     color: var(--text-main);
-    padding: 20px; /* Reduced from 60px 20px */
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,7 +66,7 @@ body {
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    gap: 16px; /* Reduced from 24px */
+    gap: 16px;
 }
 
 /* ==========================================================================
@@ -89,10 +89,9 @@ body {
     cursor: pointer;
     padding: 30px 20px;
     transition: all 0.3s ease;
-    /* OVERRIDE: Make it look like a distinct drop zone */
     border: 2px dashed var(--text-muted); 
-    background-color: transparent; /* Removes the card background so it looks recessed */
-    border-radius: 8px; /* Keeps the soft corners */
+    background-color: transparent; 
+    border-radius: 8px; 
 }
 
 .upload-zone:hover {
@@ -100,7 +99,7 @@ body {
     color: var(--text-main);
     transform: translateY(-2px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-    background-color: var(--card-bg); /* Fills in on hover for tactile feedback */
+    background-color: var(--card-bg); 
 }
 
 .upload-zone input { display: none; }
@@ -196,18 +195,10 @@ input[type="range"] {
 }
 
 .button-group button {
-    flex: 1; /* Forces perfectly equal widths */
+    flex: 1;
     margin-top: 0;
 }
 
-/* Stack them vertically on mobile so the text doesn't get crushed */
-@media (max-width: 600px) {
-    .button-group {
-        flex-direction: column;
-    }
-}
-
-/* Stack them vertically on mobile so the text doesn't get crushed */
 @media (max-width: 600px) {
     .button-group {
         flex-direction: column;
@@ -250,24 +241,19 @@ input[type="range"] {
 }
 
 /* ==========================================================================
-   5. UTILITIES (Selection & Teardown Modes)
+   5. UTILITIES & SELECTION
    ========================================================================== */
-[data-theme="light"] ::selection { background-color: #000000 !important; color: #FFFFFF !important; }
-[data-theme="light"] ::-moz-selection { background-color: #000000 !important; color: #FFFFFF !important; }
-[data-theme="dark"] ::selection, [data-theme="black-trans"] ::selection { background-color: #FFFFFF !important; color: #000000 !important; }
-[data-theme="dark"] ::-moz-selection, [data-theme="black-trans"] ::-moz-selection { background-color: #FFFFFF !important; color: #000000 !important; }
+/* Highlights inverted based on the new themes */
+[data-theme="light"] ::selection { background-color: #1d1d1d !important; color: #efe9df !important; }
+[data-theme="light"] ::-moz-selection { background-color: #1d1d1d !important; color: #efe9df !important; }
+[data-theme="dark"] ::selection { background-color: #efe9df !important; color: #1d1d1d !important; }
+[data-theme="dark"] ::-moz-selection { background-color: #efe9df !important; color: #1d1d1d !important; }
 
 button, .upload-zone, label {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; 
-}
-
-[data-theme="black-trans"],
-[data-theme="black-trans"] body {
-    background-color: transparent !important;
-    color: #FFFFFF !important; 
 }
 
 /* =========================================
@@ -282,18 +268,18 @@ button, .upload-zone, label {
 
 /* For Chrome, Edge, and Safari */
 ::-webkit-scrollbar {
-    width: 8px; /* Makes the scrollbar much slimmer */
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent; /* Hides the ugly background track */
+    background: transparent; 
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--border-light, rgba(255, 255, 255, 0.15)); /* Soft, translucent gray */
-    border-radius: 10px; /* Gives it a modern, rounded pill shape */
+    background: var(--border-light, rgba(255, 255, 255, 0.15)); 
+    border-radius: 10px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted, rgba(255, 255, 255, 0.3)); /* Gets slightly brighter when hovered */
+    background: var(--text-muted, rgba(255, 255, 255, 0.3)); 
 }
